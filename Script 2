@@ -1,1 +1,47 @@
+#!/bin/bash
+# Script 2: VLC Package Inspector
+# Author: Aastha Krishna
 
+PACKAGE="vlc"   # VLC Media Player package name
+
+# Check if VLC package is installed
+
+if command -v dpkg &> /dev/null; then
+    # Debian / Ubuntu based systems
+    if dpkg -l "$PACKAGE" &>/dev/null; then
+        echo "$PACKAGE is installed."
+        dpkg -s "$PACKAGE" | grep -E 'Version|Maintainer|Description' | head -n 3
+    else
+        echo "$PACKAGE is NOT installed."
+    fi
+
+elif command -v rpm &> /dev/null; then
+    # RedHat / Fedora based systems
+    if rpm -q "$PACKAGE" &>/dev/null; then
+        echo "$PACKAGE is installed."
+        rpm -qi "$PACKAGE" | grep -E 'Version|License|Summary'
+    else
+        echo "$PACKAGE is NOT installed."
+    fi
+
+else
+    # Universal fallback method
+    if command -v $PACKAGE &>/dev/null; then
+        echo "$PACKAGE is installed at $(command -v $PACKAGE)."
+        vlc --version | head -n 1
+    else
+        echo "$PACKAGE is NOT installed."
+    fi
+fi
+
+echo "----------------------------------------"
+
+# Case statement describing VLC philosophy in FOSS ecosystem
+case $PACKAGE in
+    vlc)
+        echo "VLC: A powerful open-source multimedia player developed by the VideoLAN project that supports almost every media format without additional codecs."
+        ;;
+    *)
+        echo "$PACKAGE: An important component of the Free and Open Source Software ecosystem."
+        ;;
+esac
