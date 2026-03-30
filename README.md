@@ -5,7 +5,7 @@ This repository contains five shell scripts and a comprehensive report outline c
 - **Registration Number**: 24BCE10672
 - **Chosen Software**: VLC Media
   ## Project Shell Scripts
-  1. ** sys_identity.sh:** Displays basic system information such as kernel version, operating system distribution, current user, system uptime, and date. This script helps understand the environment where VLC Media Player is installed and executed.
+  1. **sys_identity.sh:** Displays basic system information such as kernel version, operating system distribution, current user, system uptime, and date. This script helps understand the environment where VLC Media Player is installed and executed.
      
   2. **vlc_package_inspector.sh:** Checks whether VLC Media Player is installed on the system using package managers (dpkg or rpm). It also retrieves package details such as version, installation status, and a brief description of the VLC package.
      
