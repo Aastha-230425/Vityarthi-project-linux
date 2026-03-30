@@ -1,1 +1,37 @@
+#!/bin/bash
+# Script 1: System Identity Report
+# Author: Aastha Krishna | Course: Open Source Software
 
+# --- Variables ---
+STUDENT_NAME="Aastha Krishna"
+SOFTWARE_CHOICE="VLC Media Player"
+
+# --- System info ---
+KERNEL=$(uname -r)
+USER_NAME=$(whoami)
+UPTIME=$(uptime -p)
+DISTRO=$(cat /etc/os-release | grep -w "PRETTY_NAME" | cut -d= -f2 | tr -d '"')
+
+# Getting date in a clear format
+CURRENT_DATE=$(date +"%Y-%m-%d %H:%M:%S")
+
+# VLC information (checks if VLC exists)
+VLC_VERSION=$(vlc --version 2>/dev/null | head -n 1)
+
+# License message related to VLC
+LICENSE_MSG="VLC Media Player is free and open-source software released under the GNU General Public License (GPL)."
+
+# --- Display ---
+echo "================================"
+echo " Open Source Audit — $STUDENT_NAME"
+echo "================================"
+echo "Kernel        : $KERNEL"
+echo "Distro        : $DISTRO"
+echo "User          : $USER_NAME"
+echo "Uptime        : $UPTIME"
+echo "Date/Time     : $CURRENT_DATE"
+echo "================================"
+echo "Software      : $SOFTWARE_CHOICE"
+echo "VLC Version   : $VLC_VERSION"
+echo "License       : $LICENSE_MSG"
+echo "================================"
