@@ -1,0 +1,33 @@
+#!/bin/bash
+# Script 3: Disk and Permission Auditor
+# Author: Aastha Krishna
+
+DIRS=("/etc" "/var/log" "/home" "/usr/bin" "/tmp")
+
+echo "======================"
+echo "Directory Audit Report"
+echo "======================"
+
+for DIR in "${DIRS[@]}"; do
+    if [ -d "$DIR" ]; then
+        # $1=permissions, $3=owner, $4=group
+        PERMS=$(ls -ld "$DIR" | awk '{print "Perms: "$1" | Owner: "$3":"$4}')
+        SIZE=$(du -sh "$DIR" 2>/dev/null | cut -f1)
+        echo "$DIR => $PERMS | Size: $SIZE"
+    else
+        echo "$DIR does not exist on this system"
+    fi
+done
+
+echo "----------------------"
+echo "VLC Media Player Audit:"
+
+# Checking VLC configuration directory
+VLC_CONFIG="$HOME/.config/vlc"
+
+if [ -d "$VLC_CONFIG" ]; then
+    VLC_PERMS=$(ls -ld "$VLC_CONFIG" | awk '{print "Perms: "$1" | Owner: "$3":"$4}')
+    echo "$VLC_CONFIG => $VLC_PERMS"
+else
+    echo "Directory $VLC_CONFIG does not exist on this system."
+fi
