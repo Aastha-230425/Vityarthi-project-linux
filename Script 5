@@ -1,0 +1,39 @@
+#!/bin/bash
+# Script 5: VLC Open Source Manifesto Generator
+# Author: Aastha Krishna
+
+echo "======================================"
+echo " VLC Open Source Manifesto Generator "
+echo "======================================"
+echo "Answer three questions to generate your manifesto."
+echo ""
+
+read -p "1. Name one multimedia tool you use often: " TOOL
+read -p "2. In one word, what does 'open source freedom' mean to you? " FREEDOM
+read -p "3. Name one media project you would share freely: " BUILD
+
+DATE=$(date '+%d %B %Y')
+USER_NAME="aastha"
+OUTPUT="vlc_manifesto_${USER_NAME}.txt"
+
+# Compose manifesto using the answers
+cat << EOF > "$OUTPUT"
+--- The VLC Open Source Manifesto ---
+Date: $DATE
+Author: Aastha Krishna
+
+As a technology enthusiast, I rely on tools developed by global open-source communities. 
+Applications like VLC Media Player and $TOOL show how collaboration can create powerful tools that are accessible to everyone.
+
+To me, freedom means $FREEDOM. It means the ability to explore, modify, and improve technology without restrictions. 
+Open-source multimedia platforms such as VLC prove that innovation grows faster when knowledge is shared.
+
+If I could contribute something to the open-source world, I would create $BUILD and release it freely so others can learn, improve it, and build upon it.
+
+Open source is not just software—it is a philosophy of sharing, learning, and community.
+EOF
+
+echo ""
+echo "Manifesto successfully saved to $OUTPUT"
+echo "======================================"
+cat "$OUTPUT"
