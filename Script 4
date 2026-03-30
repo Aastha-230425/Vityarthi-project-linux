@@ -1,0 +1,43 @@
+#!/bin/bash
+# Script 4: VLC Log File Analyzer
+# Author: Aastha Krishna
+
+LOGFILE=$1
+KEYWORD=${2:-"error"}   # Default keyword is "error" if none is given
+COUNT=0
+
+if [ -z "$LOGFILE" ]; then
+    echo "Usage: $0 <logfile_path> [keyword]"
+    exit 1
+fi
+
+if [ ! -f "$LOGFILE" ]; then
+    echo "Error: File '$LOGFILE' not found."
+    exit 1
+fi
+
+echo "=================================="
+echo " VLC Media Log Analyzer"
+echo "=================================="
+echo "Log File : $LOGFILE"
+echo "Keyword  : $KEYWORD"
+echo "----------------------------------"
+
+MATCH_LINES=()
+
+# Reading file line by line
+while read -r LINE
+do
+    if echo "$LINE" | grep -i "$KEYWORD" >/dev/null
+    then
+        COUNT=$((COUNT+1))
+        MATCH_LINES+=("$LINE")
+    fi
+done < "$LOGFILE"
+
+echo "Total occurrences of '$KEYWORD' : $COUNT"
+
+echo "----------------------------------"
+echo "Last 5 matching lines:"
+printf '%s\n' "${MATCH_LINES[@]}" | tail -n 5
+echo "=================================="
